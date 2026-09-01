@@ -1,0 +1,14 @@
+/workspaces/api-testing-sass/frontend/app-tui/target/debug/deps/thiserror-4f66e7c1fdd7bdc2.d: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/aserror.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/display.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/var.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/private.rs /workspaces/api-testing-sass/frontend/app-tui/target/debug/build/thiserror-d28da972f2de000b/out/private.rs
+
+/workspaces/api-testing-sass/frontend/app-tui/target/debug/deps/libthiserror-4f66e7c1fdd7bdc2.rlib: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/aserror.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/display.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/var.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/private.rs /workspaces/api-testing-sass/frontend/app-tui/target/debug/build/thiserror-d28da972f2de000b/out/private.rs
+
+/workspaces/api-testing-sass/frontend/app-tui/target/debug/deps/libthiserror-4f66e7c1fdd7bdc2.rmeta: /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/lib.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/aserror.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/display.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/var.rs /home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/private.rs /workspaces/api-testing-sass/frontend/app-tui/target/debug/build/thiserror-d28da972f2de000b/out/private.rs
+
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/lib.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/aserror.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/display.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/var.rs:
+/home/codespace/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/thiserror-2.0.20/src/private.rs:
+/workspaces/api-testing-sass/frontend/app-tui/target/debug/build/thiserror-d28da972f2de000b/out/private.rs:
+
+# env-dep:OUT_DIR=/workspaces/api-testing-sass/frontend/app-tui/target/debug/build/thiserror-d28da972f2de000b/out
