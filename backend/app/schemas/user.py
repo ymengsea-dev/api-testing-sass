@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from uuid import UUID
 
 # Pydantic models for data validation:
 class UserCreate(BaseModel):
@@ -7,7 +8,7 @@ class UserCreate(BaseModel):
     password: str
 
 class UserOut(BaseModel):
-    id: int
+    id: UUID
     username: str
     email: EmailStr
     role: str
