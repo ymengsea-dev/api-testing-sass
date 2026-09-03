@@ -11,5 +11,10 @@ str_curl = """curl -X 'POST' \
 }'"""
 
 result = curl_parser(str_curl)
+# {
+#   'method': 'POST', 'url': 'https://musical-enigma-x59v7x55pxr53pxgp-8000.app.github.dev/auth/register',
+#   'headers': {'accept': 'application/json', 'Content-Type': 'application/json'},
+#   'body': {'username': 'string', 'email': 'user@example.com', 'password': 'string'}
+# }
 
 print(result)
