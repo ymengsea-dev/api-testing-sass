@@ -6,6 +6,10 @@ use ratatui::{
     Frame,
     widgets::{Block, Borders, Paragraph},
 };
+use ratatui::{
+    style::{Color, Style},
+    text::{Line, Span},
+};
 
 struct App {
     selected: usize,
@@ -52,7 +56,7 @@ fn run(terminal: &mut DefaultTerminal) -> io::Result<()>{
                 }
 
                 KeyCode::Down => {
-                    if app.selected < 2 {
+                    if app.selected < 4 {
                         app.selected += 1;
                     }
                 }
@@ -87,7 +91,7 @@ fn draw(frame: &mut Frame, app: &App){
     ░█▀█░█▀▀░░█░░░░▀▀█░█▀█░▀▀█░▀▀█
     ░▀░▀░▀░░░▀▀▀░░░▀▀▀░▀░▀░▀▀▀░▀▀▀";
 
-    let items = ["Endpoints", "Scenarios", "Environment"];
+    let items = ["Endpoints", "Test Case Library", "History", "Environment", "Help"];
 
     let main_layout = Layout::default()
         .direction(Direction::Vertical)
@@ -113,21 +117,35 @@ fn draw(frame: &mut Frame, app: &App){
     let content_layout = Layout::default()
         .direction(Direction::Horizontal)
             .constraints([
-                Constraint::Percentage(30),
-                Constraint::Percentage(70),
+                Constraint::Percentage(25),
+                Constraint::Percentage(75),
             ])
             .split(main_layout[1]);
     
-    let mut sidebar_content = String:: new();
+    let mut sidebar_content = Vec::new();
 
     // we iterate throught menus
     // the .enumerate also give us index without it we got only item, ex: "Endpoints"
     // with it we got : index = 0, item = "Endpoints"
-    for (index, item) in items.iter().enumerate(){
+    for (index, item) in items.iter().enumerate() {
         if index == app.selected {
-            sidebar_content.push_str(&format!("➜    {}\n", item));
+            sidebar_content.push(
+                Line::from(
+                    Span::styled(
+                        format!("➜    {}", item),
+                        Style::default().fg(Color::Cyan),
+                    )
+                )
+            );
         } else {
-            sidebar_content.push_str(&format!("     {}\n", item));
+            sidebar_content.push(
+                Line::from(
+                    Span::styled(
+                        format!("     {}", item),
+                        Style::default().fg(Color::DarkGray),
+                    )
+                )
+            );
         }
     }
     
