@@ -16,6 +16,7 @@ class Field(BaseModel):
 class EndpointOut(BaseModel):
     id: UUID
     name: str
+    url: str
     method: HttpMethod
     field: list[Field]
 
