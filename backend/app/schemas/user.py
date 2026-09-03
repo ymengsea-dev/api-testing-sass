@@ -15,6 +15,8 @@ class UserOut(BaseModel):
 
     class Config:
         from_attributes = True
+        #allow to build obj from a normal 
+        #python object attri such as SQLAlchemy model instance.
 
 class Token(BaseModel):
     access_token: str
