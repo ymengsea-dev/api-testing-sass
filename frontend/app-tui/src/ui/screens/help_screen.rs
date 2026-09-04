@@ -34,6 +34,14 @@ pub fn render_help_view(frame: &mut Frame, area: Rect) {
 
     let items = vec![
         help_item(
+            "/inspect <name>",
+            "Modify pre-built test case",
+        ),
+        help_item(
+            "/custom-test",
+            "Create new custom test case beside pre-built",
+        ),
+        help_item(
             "/execute <endpoint-name>",
             "Run HTTP request for the configured endpoint",
         ),

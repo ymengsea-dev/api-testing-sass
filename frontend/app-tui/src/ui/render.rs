@@ -1,5 +1,5 @@
 use crate::controller::AppState;
-use crate::ui::components::{render_footer, render_header, render_detail};
+use crate::ui::components::{render_input_box, render_header, render_detail};
 use:: ratatui::{
     layout::{Constraint, Direction, Layout},
     style::{Color, Style},
@@ -25,7 +25,7 @@ pub fn render(frame: &mut Frame, state: &AppState){
     render_header(frame, main_layout[0]);
 
     // footer
-    render_footer(frame, main_layout[2]);
+    render_input_box(frame, main_layout[2], state);
 
     // body content split
     let content_layout = Layout::default()
