@@ -1,5 +1,5 @@
 use crate::controller::AppState;
-
+use crate::ui::components::{render_footer, render_header, render_detail};
 use:: ratatui::{
     layout::{Constraint, Direction, Layout},
     style::{Color, Style},
@@ -22,16 +22,10 @@ pub fn render(frame: &mut Frame, state: &AppState){
         .split(inner_area);
 
     // header
-    let logo: &str ="
-    ░█▀█░█▀█░▀█▀░░░█▀▀░█▀█░█▀▀░█▀▀
-    ░█▀█░█▀▀░░█░░░░▀▀█░█▀█░▀▀█░▀▀█
-    ░▀░▀░▀░░░▀▀▀░░░▀▀▀░▀░▀░▀▀▀░▀▀▀";
-    let header = Paragraph::new(logo).block(Block::default().borders(Borders::BOTTOM));
-    frame.render_widget(header, main_layout[0]);
+    render_header(frame, main_layout[0]);
 
     // footer
-    let footer = Paragraph::new("[↑↓] Navigate     [q] Quit").block(Block::default().borders(Borders::TOP));
-    frame.render_widget(footer, main_layout[2]);
+    render_footer(frame, main_layout[2]);
 
     // body content split
     let content_layout = Layout::default()
@@ -41,7 +35,16 @@ pub fn render(frame: &mut Frame, state: &AppState){
                 Constraint::Percentage(75),
             ])
             .split(main_layout[1]);
+
+    let sidebar_layout = Layout::default()
+        .direction(Direction::Vertical)
+            .constraints([
+                Constraint::Percentage(80),
+                Constraint::Percentage(20)
+            ])
+            .split(content_layout[0]);
     
+    // selected menu in sidebar
     let list_items: Vec<ListItem> = state
         .items
         .iter()
@@ -55,13 +58,18 @@ pub fn render(frame: &mut Frame, state: &AppState){
         })
         .collect();
 
-    // sidebar 
-    let sidebar = List::new(list_items)
+    // sidebar
+    // sidebar menu list 
+    let sidebar_menu = List::new(list_items)
         .block(Block::default().borders(Borders::RIGHT));
-    frame.render_widget(sidebar, content_layout[0]);
+    frame.render_widget(sidebar_menu, sidebar_layout[0]);
 
-    let detail = Paragraph::new("Detail")
-        .block(Block::default());
-    frame.render_widget(detail, content_layout[1]);
+    // sidebar navigation hint
+    let sidebar_nav_hint = Paragraph::new("\n   [↑↓] Navigate     [q] Quit")
+        .block(Block::default().borders(Borders::RIGHT));
+    frame.render_widget(sidebar_nav_hint, sidebar_layout[1]);
+    
+    // detail render
+    render_detail(frame, content_layout[1], state.selected);
 
 }
