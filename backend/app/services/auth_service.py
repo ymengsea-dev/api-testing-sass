@@ -1,13 +1,15 @@
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin, Token
+from app.schemas.api_response import ApiResponse
 from app.core.security import hash_password, verify_password, generate_access_token
-from fastapi import HTTPException, status
+from fastapi import status
+from app.core.exceptions import UserAlreadyExistsError, InvalidCredentialsError
 
 from sqlalchemy.orm import Session
 
 def register_user(db: Session, user: UserCreate):
     if db.query(User).filter(User.email == user.email).first():
-        raise HTTPException(status_code=400, detail="Email already registered")
+        raise UserAlreadyExistsError(field="email")
     
     new_user = User(
         username=user.username,
@@ -18,15 +20,27 @@ def register_user(db: Session, user: UserCreate):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+
+    response = ApiResponse(
+        success= True,
+        status= status.HTTP_201_CREATED,
+        message = "Register new user successfully",
+        data= new_user,
+    )
+
+    return response
 
 def login_user(db: Session, data: UserLogin):
     user = db.query(User).filter(User.email == data.email).first()
     if not user or not verify_password(data.password, user.password_hash):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise InvalidCredentialsError()
+    
     token = Token(access_token=generate_access_token(user.id, user.username, user.email))
-    return token
+
+    resposne = ApiResponse(
+        success = True,
+        status= status.HTTP_200_OK,
+        message = "Login success",
+        data = token,
+    )
+    return resposne
