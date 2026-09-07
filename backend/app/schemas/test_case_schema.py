@@ -11,7 +11,7 @@ class TestCaseCreate(BaseModel):
         from_attributes = True 
 
 class TestCaseOut(BaseModel):
-    id = UUID
-    name = str
+    id: UUID
+    name: str
     inferred_type: str
     value: str

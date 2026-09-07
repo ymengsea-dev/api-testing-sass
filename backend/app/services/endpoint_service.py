@@ -1,6 +1,7 @@
 from app.models.endpoint import Endpoint
 from fastapi import HTTPException, status
 from app.schemas.endpoint_schema import EndpointCreate, EndpointOut, Field
+from app.schemas.api_response import ApiResponse
 from sqlalchemy.orm import Session
 from app.core.curl_parser import curl_parser
 from uuid import UUID
@@ -23,26 +24,36 @@ def create_new_endpoint_service(payload: EndpointCreate, db: Session):
 
     fields = []
 
-    for key, value in new_endpoint.body.items():
-        field = Field(
-            name=key,
-            inferred_type=type(value).__name__,
-            required=False
-        )
-        fields.append(field)
+    if new_endpoint.body:
+        for key, value in new_endpoint.body.items():
+            field = Field(
+                name=key,
+                inferred_type=type(value).__name__,
+                required=False
+            )
+            fields.append(field)
 
     # print(curl_data["method"])
     # print(curl_data["url"])
     # print(curl_data["headers"])
     # print(curl_data["body"])
 
-    return EndpointOut(
+    data = EndpointOut(
             id = new_endpoint.id,
             name = new_endpoint.name,
             url = new_endpoint.base_url,
             method = new_endpoint.method,
             field = fields,
         )
+
+    response = ApiResponse (
+        success= True,
+        status=status.HTTP_201_CREATED,
+        message= "success create new endpoint",
+        data= data,
+    )
+
+    return response
 
 def get_all_endpoints_service(db: Session):
 
@@ -71,7 +82,14 @@ def get_all_endpoints_service(db: Session):
 
         results.append(endpoint_out)
 
-    return results
+        response = ApiResponse (
+                success= True,
+                status=status.HTTP_201_CREATED,
+                message= "success create all endpoint",
+                data= results,
+            )
+
+    return response
 
 def delete_endpoint_by_id_service(id: UUID, db: Session):
 
@@ -90,10 +108,14 @@ def delete_endpoint_by_id_service(id: UUID, db: Session):
     db.delete(endpoint)
     db.commit()
 
-    return {
-        "status": "204 no content",
-        "message": "delete success",
-    }
+    response = ApiResponse(
+        success= True,
+        status=status.HTTP_200_OK,
+        message=f"endpoint with id {id} have been deleted",
+        data=None,
+    )
+
+    return response
 
 def delete_all_endpoint_service( db: Session):
 
@@ -101,7 +123,11 @@ def delete_all_endpoint_service( db: Session):
 
     db.commit()
 
-    return {
-        "status": "204 no content",
-        "message": f"{deleted_count} endpoints deleted successfully"
-    }
+    response = ApiResponse(
+            success= True,
+            status=status.HTTP_200_OK,
+            message=f"{deleted_count} endpoint have been deleted",
+            data=None,
+        )
+
+    return response
